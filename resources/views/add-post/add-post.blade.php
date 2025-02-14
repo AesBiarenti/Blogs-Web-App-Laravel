@@ -26,7 +26,7 @@
             padding: 10px;
         }
     </style>
-    <form action="{{route('addPost')}}" method="post" class="form">
+    <form action="{{route('addPost')}}" method="POST" class="form">
         @csrf
         <input type="text" name="title" placeholder="Blog Title">
         <textarea name="content" id="" placeholder="Blog Content"></textarea>

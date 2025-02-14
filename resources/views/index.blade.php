@@ -25,7 +25,7 @@
         <a href="{{route('login')}}"
             style="padding: 10px; background-color: dodgerblue; border-radius: 10px; text-decoration: none; color: white;">Blog
             Yaz</a>
-            <a href="{{route('profile.main')}}"
+            <a href="{{route('profile.main',Auth::id())}}"
             style="padding: 10px; background-color: lightgreen; border-radius: 10px; text-decoration: none; color: #131313;">Profile Git</a>
     </header>
     <main>

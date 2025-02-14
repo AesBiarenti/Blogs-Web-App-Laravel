@@ -38,7 +38,8 @@
                 margin-top: 10px;
                 padding: 10px
             }
-            .profile{
+
+            .profile {
                 border-radius: 100px;
                 width: 52px;
                 height: 100%;
@@ -46,6 +47,7 @@
                 align-items: center;
                 justify-content: center;
             }
+
             .bottom {
                 display: flex;
                 flex-direction: row;
@@ -56,20 +58,20 @@
     </style>
     <div class="blogs">
         @foreach (App\Models\Post::all() as $blog)
-        <div class="blog">
-            <h1>{{$blog->title}}</h1>
+            <div class="blog">
+                <h1>{{$blog->title}}</h1>
 
-            <h3>{{$blog->content}} </h3>
+                <h3>{{$blog->content}} </h3>
 
-            <div class="bottom">
-                <a href="" class="profile">{{$blog->user->name[0] ?? '?'}}</a>
-                <a href="{{route('blogs-detail')}}">Read More</a>
-                <div class="likecomment">
-                    <p>22 Comments</p>
-                    <p>18 Likes</p>
+                <div class="bottom">
+                    <a href="" class="profile">{{$blog->user->name[0] ?? '?'}}</a>
+                    <a href="{{ route('blog-detail', $blog->id) }}">Read More</a>
+                    <div class="likecomment">
+                        <p>22 Comments</p>
+                        <p>18 Likes</p>
+                    </div>
                 </div>
             </div>
-        </div>
         @endforeach
     </div>
 @endsection
