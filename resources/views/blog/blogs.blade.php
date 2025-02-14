@@ -62,10 +62,10 @@
             <h3>{{$blog->content}} </h3>
 
             <div class="bottom">
-                <a href="" class="profile">{{$blog->user->name ?? '?'}}</a>
+                <a href="" class="profile">{{$blog->user->name[0] ?? '?'}}</a>
                 <a href="{{route('blogs-detail')}}">Read More</a>
                 <div class="likecomment">
-                    <p>25 Comment</p>
+                    <p>22 Comments</p>
                     <p>18 Likes</p>
                 </div>
             </div>
