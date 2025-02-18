@@ -1,4 +1,5 @@
-@extends('add-post.main')
+@extends('add-blog.main')
+@section('admincontent')
 <style>
     .form {
         display: flex;
@@ -16,12 +17,11 @@
     }
 </style>
 @section('admincontent')
-    <form action="{{route('admin-login')}}" method="post" class="form">
-        @csrf
-        <input type="email" name="email" placeholder="User Name">
+    <form action="{{route('register')}}" method="post" class="form">
+    @csrf
+        <input type="text" name="name" placeholder="User Name">
+        <input type="email" name="email" placeholder="Email">
         <input type="password" name="password" placeholder="Password">
-        <button type="submit">Login</button>
-
-        <a href="{{route('register')}}">Not register yer? Register</a>
+        <button type="submit">Register</button>
     </form>
 @endsection

@@ -6,37 +6,46 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('blog.blogs');
-});
+//* sayfa ilk açıldığında anasayfada auth kontrolü ve blogların listelenmesi
+Route::get('/',[PostController::class , 'indexPost'])->name('blogs');
+
+//* Profil sayfasına gitme
+Route::get('/goProfilePage/{id}',[UserController::class,'goProfilePage'])->name('goProfilePage');
 
 
-Route::get('/login',function(){
-    return view('add-post.auth.login');
-})->name('login');
+//* blog div'indeki yuvarlak profil arayüzüne basınca bizi o kişinin profiline göndersin
+Route::get('/goProfileDetail')->name('goProfileDetail');
 
-Route::post('/admin-login',[UserController::class,'login']
-)->name('admin-login');
+//* blog detay sayfasının görüntülenmesi id, user, comment, likes
+Route::get('/goBlogDetail/{id}',[UserController::class,'goBlogDetail'])->name('goBlogDetail');
 
-Route::get('add-post/register',function(){
-    return view('add-post.auth.register');
-})->name('register');
+//* blog yaz butonu ile blog ekle sayfasına yönlendirilmesi ve bunu yaparken de auth kontolü yapılması
+Route::get('/go-add-post',[PostController::class , 'goAddPost'])->name('goAddPost');
 
-Route::post('/admin-register',[UserController::class,'register']
-)->name('admin-register');
+//* Ayrı olarak giriş sayfasına yönlendirme işlemi
+Route::get('/goLogin',function(){
+    return view('add-blog.auth.login');
+})->name('goLogin');
 
+//* Ayrı olarak kayıt sayfasına yönelme işlemi
+Route::get('/go-register',function(){
+    return view('add-blog.auth.register');
+})->name('go-register');
 
+//* giriş yapğmadıysa otomatik olarak register sayfasına yönlendirilmesi 
+Route::get('/goRegister', [UserController::class , 'goRegister'])->name('goRegister');
 
-Route::post('/add-post/{id}',[PostController::class,'addPost'])
-->name('addPost');
+//* Giriş yapma işlemi
+Route::post('/login',[UserController::class , 'login'])->name('login');
 
-//* İd ye göre blog detay sayfasına yönlenme
-Route::get('/blog-detail/{id}', function ($id) {
-    $blog = App\Models\Post::findOrFail($id);
-    return view('blog.blogs-detail', compact('blog'));
-})->name('blog-detail');
+//* Kayıt olma işlemi
+Route::post('/register',[UserController::class , 'register'])->name('register');
 
-Route::get('/profile/{id}',function($id){
-    $user = User::with('posts')->findOrFail($id);
-    return view('profie.main',compact('user'));
-})->name('profile.main');;
+//* Çıkış Yapma işlemi
+Route::get('/logout',[UserController::class , 'logOut'])->name('logOut');
+
+//* blog ekle post
+Route::post('/add-blog/{id}',[PostController::class,'addPost'])->name('addblog');
+
+//* Detay Sayfası içerisinde gönderiye yorum yapma/silme/güncelleme işlemi
+//* Detay Sayfası içinde like like'ı geri çekme işlemi

@@ -9,7 +9,15 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function indexPost (Request $request){}
+    public function indexPost (){
+      return view('blog.blogs');  
+    }
+    public function goAddPost(){
+        if (Auth::check()) {
+            return view('add-blog.add-blog');
+        }
+        return view('add-blog.auth.login');
+    }
     public function addPost (Request $request , $id){
         $request->validate([
             'title'=>'required|string|min:1',
@@ -20,10 +28,10 @@ class PostController extends Controller
             'title'=>$request->title,
             'content'=>$request->content,
             'category_id'=>$request->category_id,
-            'user_id'=>Auth::id()
+            'user_id'=>$id
         ]);
-        $user = User::findOrFail($id);
-        return redirect()->route('profile.main',compact('user'));
+        
+        return redirect()->route('blogs',compact('id'));
     }
     public function deletePost (Request $request){}
     public function updatePost (Request $request){}

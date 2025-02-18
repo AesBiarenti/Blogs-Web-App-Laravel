@@ -51,14 +51,15 @@
 
 <h1>ID : {{ $user->id }}</h1>
 <h1>NAME : {{ $user->name }}</h1>
-<h2>MY BLOGS</h2>
-
+<h2 style="margin: 20px 0">MY BLOGS</h2>
+<a href="{{route('logOut')}}"
+style="padding: 10px;background-color: crimson; border-radius: 10px; text-decoration: none; color: white;">Çıkış yap</a>
 <div class="blogs">
     @foreach($user->posts as $post)
         <div class="blog">
             <h1>{{ $post->title }}</h1>
             <h3>{{ Str::limit($post->content, 150) }}</h3> <!-- İçeriğin sadece ilk 150 karakterini göster -->
-            <a href="{{ route('blog-detail', $post->id) }}">Detayları Gör</a>
+            <a href="">Detayları Gör</a>
         </div>
     @endforeach
 </div>

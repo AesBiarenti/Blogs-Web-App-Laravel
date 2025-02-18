@@ -1,4 +1,4 @@
-@extends('add-post.main')
+@extends('add-blog.main')
 @section('admincontent')
     <style>
         .form {
@@ -26,7 +26,7 @@
             padding: 10px;
         }
     </style>
-    <form action="{{route('addPost')}}" method="POST" class="form">
+    <form action="{{route('addblog',Auth::id())}}" method="POST" class="form">
         @csrf
         <input type="text" name="title" placeholder="Blog Title">
         <textarea name="content" id="" placeholder="Blog Content"></textarea>

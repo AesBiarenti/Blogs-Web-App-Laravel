@@ -65,7 +65,7 @@
 
                 <div class="bottom">
                     <a href="" class="profile">{{$blog->user->name[0] ?? '?'}}</a>
-                    <a href="{{ route('blog-detail', $blog->id) }}">Read More</a>
+                    <a href="{{route('goBlogDetail',$blog->id)}}">Read More</a>
                     <div class="likecomment">
                         <p>22 Comments</p>
                         <p>18 Likes</p>
