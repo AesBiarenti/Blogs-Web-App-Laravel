@@ -56,6 +56,7 @@
 <div class="blogs">
     @foreach($userDetail->posts as $post)
         <div class="blog">
+            <h1>{{$post->user->name}}</h1>
             <h1>{{ $post->title }}</h1>
             <h3>{{ Str::limit($post->content, 150) }}</h3> <!-- İçeriğin sadece ilk 150 karakterini göster -->
             <a href="{{route('goBlogDetail',$post->id)}}">Read More</a>

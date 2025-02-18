@@ -14,7 +14,8 @@ class UserController extends Controller
         return view('profie.main',compact('user'));
     }
     public function goProfileDetailPage($id){
-        $userDetail = User::with('posts.user')->findOrFail($id);
+        // $userDetail = User::with('posts.user')->findOrFail($id);
+        $userDetail = User::findOrFail($id);
         return view('profie.profile-detail',compact('userDetail'));
     }
     public function login(Request $request){
@@ -50,7 +51,7 @@ class UserController extends Controller
         return redirect()->route('goLogin')->with('success','kayıt işlemi başarılı');
     }
     public function goBlogDetail($id){
-        $blogDetail = Post::with(['comments.user','comments.likes'])->findOrFail($id);
+        $blogDetail = Post::with(['comments.user', 'likes'])->findOrFail($id);
         return view('blog.blogs-detail',compact('blogDetail'));
     }
 }

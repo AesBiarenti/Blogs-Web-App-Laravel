@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
@@ -50,4 +51,5 @@ Route::get('/logout',[UserController::class , 'logOut'])->name('logOut');
 Route::post('/add-blog/{id}',[PostController::class,'addPost'])->name('addblog');
 
 //* Detay Sayfası içerisinde gönderiye yorum yapma/silme/güncelleme işlemi
+Route::post('/addcomment',[CommentController::class,'addcomment'])->name('addcomment');
 //* Detay Sayfası içinde like like'ı geri çekme işlemi

@@ -5,17 +5,24 @@
         .main {
             display: flex;
             flex-direction: column;
+            height: 100vh;
+        }
+
+        .header {
+            flex: 1;
         }
 
         .comment {
             flex: 2;
-            margin: 50px 0;
-            padding: 50px;
             background-color: darkseagreen;
-            height: 100%;
         }
 
-        input {
+        form {
+            display: flex;
+            flex-direction: row;
+        }
+
+        textarea {
             padding: 10px;
             width: 500px;
         }
@@ -42,18 +49,25 @@
             <p><strong>ID:</strong> {{ $blogDetail->id }}</p>
             <p><strong>Başlık:</strong> {{ $blogDetail->title }}</p>
             <p><strong>İçerik:</strong> {{ $blogDetail->content }}</p>
+            <p class="like-count">❤️ {{ $blogDetail->likes->count() }} Beğeni</p>
         </div>
 
         <div class="comment">
-            <input type="text" name="content" placeholder="Yorum ekle">
+            <form action="{{route('addcomment')}}" method="POST">
+                @csrf
+                <input type="hidden" name="post_id" value="{{ $blogDetail->id }}">
+                <textarea name="content" placeholder="Fikrini Yaz"></textarea>
+                <button type="submit">Yorum Ekle</button>
+            </form>
             <h2>Yorumlar</h2>
 
             <div class="commentContent">
-                @foreach ($blogDetail->comments as $comment)
+                @foreach ($blogDetail->comments as $blogsComment)
+                
+
                     <div class="comment-box">
-                        <p class="comment-user">{{ $comment->user->name }}:</p>
-                        <p>{{ $comment->content }}</p>
-                        <p class="like-count">❤️ {{ $comment->likes->count() }} Beğeni</p>
+                        <p class="comment-user">{{ $blogsComment->user->name }}:</p>
+                        <p>{{ $blogsComment->content }}</p>
                     </div>
                 @endforeach
             </div>
