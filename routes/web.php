@@ -12,6 +12,8 @@ Route::get('/',[PostController::class , 'indexPost'])->name('blogs');
 //* Profil sayfasına gitme
 Route::get('/goProfilePage/{id}',[UserController::class,'goProfilePage'])->name('goProfilePage');
 
+//* Blogu Paylaşan profilin detay sayfasına gitme
+Route::get('/goProfileDetailPage/{id}',[UserController::class,'goProfileDetailPage'])->name('goProfileDetailPage');
 
 //* blog div'indeki yuvarlak profil arayüzüne basınca bizi o kişinin profiline göndersin
 Route::get('/goProfileDetail')->name('goProfileDetail');

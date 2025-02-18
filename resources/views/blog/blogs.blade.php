@@ -64,7 +64,7 @@
                 <h3>{{$blog->content}} </h3>
 
                 <div class="bottom">
-                    <a href="" class="profile">{{$blog->user->name[0] ?? '?'}}</a>
+                    <a href="{{route('goProfileDetailPage',$blog->user->id)}}" class="profile">{{$blog->user->name[0] ?? '?'}}</a>
                     <a href="{{route('goBlogDetail',$blog->id)}}">Read More</a>
                     <div class="likecomment">
                         <p>22 Comments</p>
