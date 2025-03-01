@@ -44,12 +44,27 @@
     </style>
 
     <div class="main">
+        @session('success')
+            <p>{{session('success')}}</p>
+        @endsession
         <div class="header">
             <h1>Blog Detay Sayfası</h1>
             <p><strong>ID:</strong> {{ $blogDetail->id }}</p>
             <p><strong>Başlık:</strong> {{ $blogDetail->title }}</p>
             <p><strong>İçerik:</strong> {{ $blogDetail->content }}</p>
-            <p class="like-count">❤️ {{ $blogDetail->likes->count() }} Beğeni</p>
+            <form action="{{ route('getLike') }}" method="post">
+                @csrf
+                <input type="hidden" name="post_id" value="{{ $blogDetail->id }}">
+
+                <button type="submit" class="like-count">
+                    @if($userLiked)
+                        💔 Beğeniyi Geri Çek
+                    @else
+                        ❤️ Beğen
+                    @endif
+                    {{ $blogDetail->likes->count() }} Beğeni
+                </button>
+            </form>
         </div>
 
         <div class="comment">
@@ -63,8 +78,6 @@
 
             <div class="commentContent">
                 @foreach ($blogDetail->comments as $blogsComment)
-                
-
                     <div class="comment-box">
                         <p class="comment-user">{{ $blogsComment->user->name }}:</p>
                         <p>{{ $blogsComment->content }}</p>

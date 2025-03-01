@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Like;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -52,6 +53,10 @@ class UserController extends Controller
     }
     public function goBlogDetail($id){
         $blogDetail = Post::with(['comments.user', 'likes'])->findOrFail($id);
-        return view('blog.blogs-detail',compact('blogDetail'));
+        $userLiked = false;
+        if (Auth::check()) {
+            $userLiked = Like::where('user_id', Auth::id())->where('post_id', $id)->exists();
+        }
+        return view('blog.blogs-detail',compact('blogDetail','userLiked'));
     }
 }
